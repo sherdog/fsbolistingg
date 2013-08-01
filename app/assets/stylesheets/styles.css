@@ -6,6 +6,9 @@
     padding-bottom: 5px;
     padding-top: 5px;
 }
+#header .navbar {
+    border-radius: 0px;
+}
 
 #header .navbar-nav > li > a:hover {
     border-radius: 10px;
@@ -22,7 +25,7 @@
 
 #header .navbar-nav {
     margin-bottom: 0;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 #header .navbar-brand {
@@ -33,3 +36,12 @@
     color: #FFFFFF;
 }
 
+#header .nav .caret {
+    border-bottom-color: #97efde;
+    border-top-color: #97efde;
+}
+
+#header .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+    background-color: #107864;
+    color: #97efde;
+}

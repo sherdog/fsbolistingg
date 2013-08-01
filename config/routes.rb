@@ -2,11 +2,9 @@ Fsbo::Application.routes.draw do
   get "dashboard/index"
   get "home/index"
 
-
-  devise_for :users
-
-  devise_scope :user do
-    get "sign_in", :to => "users/sessions#new"
+  devise_for :users do
+    get "/sign_in" => "devise/sessions#new"
+    get "/register" => "devise/registrations#new"
   end
 
   resources :listings

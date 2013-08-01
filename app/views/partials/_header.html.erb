@@ -1,12 +1,22 @@
 <div id="header">
 		<div class="navbar">
 			<div class="container">
-				<a class="navbar-brand" href="#">Iowa FSBO Listings</a>
+				<%= link_to image_tag('iowafsbo-logo.png'), home_index_path, :class => 'navbar-brand' %></a>
 				<ul class="nav navbar-nav pull-right">
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#">Browse</a></li>
 					<li><a href="#">Rent-to-Own</a></li>
 					<li><A href="#">Submit Property</a></li>
+					<% if user_signed_in? %>
+					<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Your Account <span class="caret"></span></a>
+						 <ul class="dropdown-menu">
+					    	<li><%= link_to 'Your Account', dashboard_index_path %></li>
+					    </ul>
+					</li>
+				   
+					<% else %>
+					<li><%= link_to 'Sign in', sign_in_path %></li>
+					<% end %>
 				</ul>
 			</div>
 	</div>
