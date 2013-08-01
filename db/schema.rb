@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130801044417) do
+ActiveRecord::Schema.define(:version => 20130801172132) do
 
   create_table "listings", :force => true do |t|
     t.string   "title"
@@ -22,9 +22,32 @@ ActiveRecord::Schema.define(:version => 20130801044417) do
     t.string   "state"
     t.string   "zipcode"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.decimal  "price"
+    t.decimal  "sqft"
+    t.string   "type"
+    t.integer  "bedrooms"
+    t.boolean  "basement"
+    t.integer  "status"
+    t.decimal  "bathrooms"
+    t.string   "lot_size"
+    t.integer  "fireplace"
+    t.string   "cooling"
+    t.string   "garage"
+    t.string   "heating"
+    t.string   "year_built"
+    t.string   "interior_features"
+    t.string   "exterior_features"
+    t.string   "elementary_school"
+    t.string   "middle_school"
+    t.string   "high_school"
+    t.string   "contact_number"
+    t.string   "contact_email"
+    t.string   "mls_number"
+    t.string   "lat"
+    t.string   "long"
+    t.string   "basement_type"
   end
 
   create_table "users", :force => true do |t|

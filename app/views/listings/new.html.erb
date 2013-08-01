@@ -1,63 +1,191 @@
 <div class="container">
-	<h2>Create your listing</h2>
+	<div class="row">
+		<h2>Create your listing</h2>
+		<p>Ready to start selling your property? just complete the form below, you will  be asked to upload pictures on the next page. It usually take about 2 minutes to fill out. Once you complete the form, you listing will appear in our results. <b>You also get to use some tools to help you sell your property online as well as links to purchase FSBO Signs to stick right in your front yard. Every little bit helps to get your property sold!</b></p>
+	</div>
+	<hr />
 	<div class="row">
 		<div class="col-lg-12">
 			<%= simple_form_for @listing, :html => { :class => 'form-horizontal' } do |f| %>
-			<div class="form-group">
-				<label class="col-lg-2 control-label">Title</label>
-				<div class="col-lg-8">
-					<%= f.input_field :title, :class => 'form-control' %>
-				</div>
-			</div>
+			
+			<fieldset>
+				<legend>Location</legend>
+				<div class="row">
+					<div class="col-lg-9">
 
-			<div class="form-group">
-				<label class="col-lg-2 control-label">Asking Price</label>
-				<div class="col-lg-3">
-					<%= f.input_field :price, :class => 'form-control' %>
-				</div>
-			</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Address</label>
+							<div class="col-lg-10">
+								<%= f.input_field :address_1, :class => 'form-control ' %>
+							</div>
+						</div>
 
-			<div class="form-group">
-				<label class="col-lg-2 control-label">Address</label>
-				<div class="col-lg-8">
-					<%= f.input_field :address_1, :class => 'form-control' %>
-				</div>
-			</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Address 2</label>
+							<div class="col-lg-10">
+								<%= f.input_field :address_2, :class => 'form-control ' %>
+							</div>
+						</div>
 
-			<div class="form-group">
-				<label class="col-lg-2 control-label">Address 2</label>
-				<div class="col-lg-8">
-					<%= f.input_field :address_2, :class => 'form-control' %>
+						<div class="form-group">
+							<div class="col-lg-2"> </div>
+							<div class="col-lg-4">
+								<label class="control-label">City</label><br />
+								<%= f.input_field :title, :class => 'form-control ' %>
+							</div>
+							<div class="col-lg-2">
+								<label class="control-label">State</label><br />
+								<%= f.input_field :state, collection: @states, :selected => "IA", :class => 'form-control ' %>
+							</div>
+							<div class="col-lg-2">
+								<label class="control-label">Zipcode</label><br />
+								<%= f.input_field :zipcode, :class => 'form-control ' %>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="well well-success"><strong>Tip:</strong><p>Make sure you provide as much information as possible, once you add the address a map should be displayed with your property marked.</p></div>
+					</div>
 				</div>
-			</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="location-map"></div>
+					</div>
+				</div>
+			</fieldset>
+			
 
+			<fieldset>
+				<legend>Property Details</legend>
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">MLS# (if available)</label>
+					<div class="col-lg-3">
+						<%= f.input_field :mls_number, :class => 'form-control' %>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">Property Type</label>
+					<div class="col-lg-3">
+						<%= f.input_field :type, collection: @property_types, :prompt => "Select one", :class => 'form-control' %>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">Asking Price</label>
+					<div class="col-lg-3 input-group">
+						<span class="input-group-addon">$</span>
+						<%= f.input_field :price, :class => 'form-control' %>
+
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">Year Built</label>
+					<div class="col-lg-2">
+						<%= f.input_field :year_built, collection: 1900..Time.now.year, :prompt => "Select one", :selected => 1960, :class => 'form-control' %>
+
+					</div>
+				</div>
+
+				
+
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">Square Footage</label>
+					<div class="col-lg-3 input-group">
+						<%= f.input_field :sqft, :class => 'form-control' %>
+						<span class="input-group-addon">sq. ft.</span>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">Bedrooms/Bathrooms</label>	
+					<div class="col-lg-1 ">
+						<label>Bedrooms</label>
+						<%= f.input_field :bedrooms, :collection => 1..10, :selected => 1, :class => 'form-control' %>
+					</div>
+					<div class="col-lg-2">
+						<label>Bathrooms</label>
+						<%= f.input_field :bathrooms, :collection => @bathroom_col, :selected => 1, :class => 'form-control' %>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">Heating/Cooling</label>	
+					<div class="col-lg-3 ">
+						<label>Heating</label>
+						<%= f.input_field :heating, collection: @heating_choices, :prompt => "Select one", :class => 'form-control' %>
+						
+					</div>
+					<div class="col-lg-3">
+						<label>Cooling</label>
+						<%= f.input_field :cooling, collection: @cooling_choices, :prompt => "Select one", :class => 'form-control' %>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<label class="col-lg-2 control-label">Basement</label>
+					<div class="col-lg-2">
+						<%= f.input_field :basement_type, collection: @basement_types, :prompt => 'Select one', :class => 'form-control' %>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-2 control-label">Description</label>
+					<div class="col-lg-8">
+						<%= f.input_field :description, :class => 'form-control  col-lg-6', :style => 'height:150px;' %>
+					</div>
+				</div>
+
+			</fieldset>
+			<fieldset>
+				<legend>Location Information</legend>
+				<div class="form-group">
+					<label class="col-lg-2 control-label">Schools</label>
+					<div class="col-lg-3">
+						<label>Elementary School</label>
+						<%= f.input_field :elementary_school, :class => 'form-control' %>
+					</div>
+					<div class="col-lg-3">
+						<label>Middle School</label>
+						<%= f.input_field :elementary_school, :class => 'form-control' %>
+					</div>
+					<div class="col-lg-3">
+						<label>High School</label>
+						<%= f.input_field :elementary_school, :class => 'form-control' %>
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend>Contact Information</legend>
+				<div class="form-group">
+					<label class="col-lg-2 control-label">Contact Email</label>
+					<div class="col-lg-5">
+						<%= f.input_field :contact_email, :class => 'form-control' %>
+						<span class="help-block">We do not display your email to the public and we never sell your email address.</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-2 control-label">Contact Phone</label>
+					<div class="col-lg-5">
+						<%= f.input_field :contact_number, :class => 'form-control' %>
+						<span class="help-block">This will be displayed in the listing details so people can contact you.</span>
+					</div>
+				</div>
+			</fieldset>
+			<hr />
 			<div class="form-group">
 				<div class="col-lg-2"> </div>
-				<div class="col-lg-4">
-					<label class="control-label">City</label><br />
-					<%= f.input_field :title, :class => 'form-control' %>
-				</div>
-				<div class="col-lg-2">
-					<label class="control-label">State</label><br />
-					<%= f.input_field :state, collection: @states, :selected => "IA", :class => 'form-control' %>
-				</div>
-				<div class="col-lg-2">
-					<label class="control-label">Zipcode</label><br />
-					<%= f.input_field :zipcode, :class => 'form-control' %>
+				<div class="col-lg-10">
+					<%= f.button :submit, :class => 'btn btn-primary btn-large pull-left', :value => "Save and continue to upload photos" %>
+					<%= f.button :submit, :class => 'btn btn-default pull-right', :value => "Save & Quit" %>
 				</div>
 			</div>
-
-
-			<div class="form-group">
-				<label class="col-lg-2 control-label">Title</label>
-				<div class="col-lg-8">
-					<%= f.input_field :description, :class => 'form-control' %>
-				</div>
-			</div>
-				
 			<% end %>
 
-
+			<br /><br /><br /><br />
 		</div>
 	</div>
 </div>

@@ -13,14 +13,30 @@ class ListingsController < ApplicationController
 
 	#public listing view
 	def show
-		
+		@listing = Listing.find(params[:id])
+	end
+
+	def get_lat_long
+
 	end
 
 	#user create listing
 	def create
-		
+		@listing = Listing.new(params[:listing])
+
+		@listing.save
+		redirect_to @listing
 	end
+
+
 	def new
+
+		@heating_choices = [ ["Gas", "Gas"], ["Electric", "Electric"], ["Geothermal", "Geothermal"], ["Other", "Other"]]
+		@cooling_choices = [ ["Central Air", "Central Air"], ["Geothermal", "Geothermal"], ["None", "None"], ["Other", "Other"]]
+		@property_types = [ ["Single Family", "Single Family"], ["Condo", "Condo"], ["Multi Family", "Multi Family"], ["Vacant Land", "Vacant Land"], ["Mobile Home", "Mobile Home"] ]
+		@basement_types = [ ["Finished", "Finished"], ["Unfinished", "Unfinished"], ["Other", "Other"], ["None", "None"]]
+
+		@bathroom_col = (1..10).step(0.25)
 		@states = [
 	    [ "Alabama", "AL" ],
 	    [ "Alaska", "AK" ],
@@ -93,5 +109,9 @@ class ListingsController < ApplicationController
 
 	end
 
+	private
 
+	  def listing_params
+	  		params.require(:listing).permit(:address_1, :address_2, :city, :state, :zipcode, :price, :sqft, :type, :bedrooms, :basement, :status, :bathrooms, :lotsize, :fireplace, :cooling, :garage, :heating, :year_built, :interior_fetaures, :exterior_features, :elementary_school, :middle_school, :high_school, :contact_number, :contact_email, :mls_number)
+	  end		
 end
