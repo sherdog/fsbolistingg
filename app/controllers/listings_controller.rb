@@ -73,7 +73,6 @@ class ListingsController < ApplicationController
 	def create
 		@listing = Listing.new(params[:listing])
 		@listing.user_id = current_user.id
-		@lsiting.price = 
 		#get lat/long from address
 
 		if @listing.save

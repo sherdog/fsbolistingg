@@ -137,3 +137,5 @@ a {
     padding: 10px 30px 10px 15px;
     position: relative;
 }
+
+#sidebar_listings { padding-right: 0px; padding-top:70px; }

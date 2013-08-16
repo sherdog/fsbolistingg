@@ -1,0 +1,119 @@
+<script type="text/javascript">
+ var markers_array = [];
+  var map = null;  
+  var infowindow = new google.maps.InfoWindow();
+  
+  function initialize() {
+    var iconBase = 'http://cvsimotorsports.com/';
+    // Create the map 
+
+    // No need to specify zoom and center as we fit the map further down.
+    var map = new google.maps.Map(document.getElementById("map_canvas"), {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      streetViewControl: false
+    }); //end var map
+
+    // Define the list of markers.
+    // This could be generated server-side with a script creating the array.
+    var markers = [
+      <% @listings.each_with_index do |listing, index| %>
+      { lat: <%= listing.latitude %>, lng: <%= listing.longitude %>, name: " ", html: '<div style="width:300px;"><img src="<%= listing.images.first.image.url(:small) %>"  style="margin:20px 5px 5px 5px" height="75" align="right" /><%= listing.address_1 %> <br /> <% if listing.address_2.present? %><%= listing.address_2 %><br /><% end %><%= listing.city %>, <%= listing.state %> <%= listing.zipcode %><br /><%= number_to_currency(listing.price) %><br /><strong>P.</strong> <%= listing.contact_number %> <br /><%= link_to 'View Listing',  view_listing_path(listing) %></div>' } <%= "," unless listing == @listings.last %>
+       <% end %>
+    ]; //end markers
+    
+
+    // Create the markers ad infowindows.
+    for (index in markers) {
+      addMarker(markers[index]);
+      markers_array.push(markers[index]);
+    } //end for
+
+    function addMarker(data) {
+      
+      // Create the marker
+      var iconShadow = {
+        url: iconBase + 'icon_shadow.png',
+        anchor: new google.maps.Point(3,13)
+      };
+
+      var marker = new google.maps.Marker({
+        icon: iconBase + 'fsbo_marker.png',
+        shadow: iconShadow,
+        position: new google.maps.LatLng(data.lat, data.lng),
+        map: map,
+        title: data.name
+      });
+
+      markers_array.push(marker);
+      
+      // Create the infowindow with two DIV placeholders
+      // One for a text string, the other for the StreetView panorama.
+      
+      var content = document.createElement("DIV");
+      var title = document.createElement("DIV");
+      var html = document.createElement("DIV");
+      var streetview = document.createElement("DIV");
+      
+      html.innerHTML = data.html;
+      title.innerHTML = data.name;
+      content.appendChild(title);
+      content.appendChild(html);
+      streetview.style.width = "500px";
+      streetview.style.height = "300px";
+      //content.appendChild(streetview);
+
+      infowindow = new google.maps.InfoWindow({
+        content: content,
+        size: new google.maps.Size(400,100)
+      }); //end infowindow instance
+
+      // Open the infowindow on marker click
+      google.maps.event.addListener(marker, "click", function() {
+        infowindow.open(map, this);
+      }); //end addListener
+    
+      // Handle the DOM ready event to create the StreetView panorama
+      // as it can only be created once the DIV inside the infowindow is loaded in the DOM.
+      google.maps.event.addListenerOnce(infowindow, "domready", function() {
+        var panorama = new google.maps.StreetViewPanorama(streetview, {
+            navigationControl: false,
+            enableCloseButton: false,
+            addressControl: false,
+            linksControl: false,
+            visible: true,
+            position: marker.getPosition()
+        });
+      }); //end maps ListenerOnce
+    } //end add marker
+
+    // Zoom and center the map to fit the markers
+    // This logic could be conbined with the marker creation.
+    // Just keeping it separate for code clarity.
+    var bounds = new google.maps.LatLngBounds();
+      for (index in markers) {
+        var data = markers[index];
+        bounds.extend(new google.maps.LatLng(data.lat, data.lng));
+      }
+      map.fitBounds(bounds);
+    } //end initialize
+
+    
+  $(document).ready(function(){
+      $('#toggle_search_box').click(function(e){
+          e.preventDefault();
+          $('#search_box').slideToggle();
+      });
+
+      $('#btn_close_search_box').click(function(e){
+        e.preventDefault();
+        $('#search_box').slideToggle();
+      });
+
+      $('.marker_toggle').mouseover(function(e){
+        var id = $(this).attr('id');
+        id = id.replace('listing_', '');
+        infowindow.open(null,null);
+        google.maps.event.trigger(markers_array[id], 'click');
+      });
+  });
+</script>
