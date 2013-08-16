@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+         <h1>Inbox</h1>
+        
+        <div class="col-lg-12">
+            <table class="table">
+                <tr>
+                    <th>From</th>
+                        <th>Date added</th>
+                        <th>Viewed</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <% if @user_messages.present? %>
+                    <% @user_messages.each do |user_message| %>
+                      <tr>
+                        <td><%= user_message.from %></td>
+                        <td><%= user_message.date_added %></td>
+                        <td><%= user_message.viewed %></td>
+                        <td><%= link_to 'Show', user_message %></td>
+                        <td><%= link_to 'Edit', edit_user_message_path(user_message) %></td>
+                        <td><%= link_to 'Destroy', user_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                      </tr>
+                      <% end %>
+                    <% else %>
+                        <tr>    
+                            <td colspan="6">
+                                <i>No messages</i>
+                            </td>
+                        </tr>
+                    
+                    <% end %>
+            </table>
+        </div>
+        
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+

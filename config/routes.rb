@@ -1,15 +1,27 @@
 Fsbo::Application.routes.draw do
-  get "dashboard/index"
-  get "home/index"
+ 
 
+  get "dashboard/index"
+  get "home/index" => 'listings#index'
+  
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :users do
     get "/sign_in" => "devise/sessions#new"
-    get "/register" => "devise/registrations#new"
+    get "/sign_up" => "devise/registrations#new"
+    resources :user_messages do
+      post :delete_selected
+    end
   end
 
-  resources :listings
+  resources :listings do
+   match 'share', :on => :member
+   match 'view', :on => :member
+  end
+  resources :property_types
 
-
+  namespace :users do
+    root :to => "dashboard#index"
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -60,7 +72,7 @@ Fsbo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'listings#index'
 
   # See how all your routes lay out with "rake routes"
 

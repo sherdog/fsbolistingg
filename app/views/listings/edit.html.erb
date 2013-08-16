@@ -1,0 +1,17 @@
+<div class="container">
+	<%= content_tag(:div, flash[:error], :class => "alert alert-danger") if flash[:error] %>
+		<%= content_tag(:div, flash[:notice], :class => "alert alert-warning") if flash[:notice] %>
+		<%= content_tag(:div, flash[:alert], :class => "alert") if flash[:alert] %>
+	<div class="row">
+		<h2>Create your listing</h2>
+		<p>Ready to start selling your property? just complete the form below, you will  be asked to upload pictures on the next page. It usually take about 2 minutes to fill out. Once you complete the form, you listing will appear in our results. <b>You also get to use some tools to help you sell your property online as well as links to purchase FSBO Signs to stick right in your front yard. Every little bit helps to get your property sold!</b></p>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-lg-12">
+			
+			<%= render 'form' %>
+			<br /><br /><br /><br />
+		</div>
+	</div>
+</div>

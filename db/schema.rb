@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130801172132) do
+ActiveRecord::Schema.define(:version => 20130811163254) do
+
+  create_table "images", :force => true do |t|
+    t.string   "listing_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
 
   create_table "listings", :force => true do |t|
     t.string   "title"
@@ -22,11 +32,11 @@ ActiveRecord::Schema.define(:version => 20130801172132) do
     t.string   "state"
     t.string   "zipcode"
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.decimal  "price"
     t.decimal  "sqft"
-    t.string   "type"
+    t.string   "property_type"
     t.integer  "bedrooms"
     t.boolean  "basement"
     t.integer  "status"
@@ -45,9 +55,29 @@ ActiveRecord::Schema.define(:version => 20130801172132) do
     t.string   "contact_number"
     t.string   "contact_email"
     t.string   "mls_number"
-    t.string   "lat"
-    t.string   "long"
     t.string   "basement_type"
+    t.string   "slug"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "featured",          :default => 0
+  end
+
+  create_table "property_types", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_messages", :force => true do |t|
+    t.string   "from"
+    t.string   "phone"
+    t.string   "message"
+    t.integer  "user_id"
+    t.integer  "listing_id"
+    t.datetime "date_added"
+    t.boolean  "viewed"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -63,9 +93,15 @@ ActiveRecord::Schema.define(:version => 20130801172132) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "slug"
+    t.string   "phone_number"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
 
 end

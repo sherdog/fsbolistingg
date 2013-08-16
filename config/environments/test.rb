@@ -5,7 +5,15 @@ Fsbo::Application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
+
+  FACEBOOK_APP_ID = '412736445504336'
+  FACEBOOK_SECRENT = '4b6f0543fac2c73fb00f42e0c840f6d8'
+
   config.cache_classes = true
+
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  # Precompile additional assets
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
@@ -49,6 +57,6 @@ Fsbo::Application.configure do
     :authentication   => 'plain',
     :enable_starttls_auto => true
   }
-
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   
 end

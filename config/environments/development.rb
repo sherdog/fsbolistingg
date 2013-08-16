@@ -4,8 +4,15 @@ Fsbo::Application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.cache_classes = false
+  
+  FACEBOOK_APP_ID = '412736445504336'
+  FACEBOOK_SECRET = '4b6f0543fac2c73fb00f42e0c840f6d8'
 
+
+  config.cache_classes = false
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  # Precompile additional assets
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
@@ -50,6 +57,8 @@ Fsbo::Application.configure do
     :authentication   => 'plain',
     :enable_starttls_auto => true
   }
+
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
   
 end

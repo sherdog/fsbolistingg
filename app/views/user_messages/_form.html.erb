@@ -1,0 +1,27 @@
+<%= simple_form_for(@user_message) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= f.input :from %>
+
+    <%= f.input :phone %>
+
+    <%= f.input :message %>
+
+    <%= f.input :user_id %>
+
+    <%= f.input :listing_id %>
+
+    <%= f.input :message %>
+
+    <%= f.input :date_added %>
+
+    <%= f.input :viewed %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

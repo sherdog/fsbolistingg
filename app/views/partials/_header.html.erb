@@ -1,24 +1,34 @@
 <div id="header">
 
-		<div class="navbar">
+		<div class="navbar navbar-fixed-top">
 			<div class="container">
+				 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>
 				<%= link_to image_tag('iowafsbo-logo.png'), home_index_path, :class => 'navbar-brand' %></a>
-				<ul class="nav navbar-nav pull-right">
-					<li class="<%= 'active' if params[:controller] == 'home' %>"><a href="#">Home</a></li>
-					<li class="<%= 'active' if params[:controller] == 'listings' && params[:action] != 'new' %>"><a href="#">Browse</a></li>
+				<div class="nav-collapse collapse navbar-responsive-collapse">
+				<ul class="nav navbar-nav pull-right ">
+					<li class="<%= 'active' if params[:controller] == 'home' %>"><%= link_to "Home", home_index_path %></li>
+					<li class="<%= header_nav(listings_path) %>"><%= link_to 'Browse', listings_path %></li>
+					<li class="#{header_nav(new_listing_path)}"><%= link_to 'Submit Property', new_listing_path %></li>
 					<li class="<%= 'active' if params[:controller] == 'rent-to-own' %>"><a href="#">Rent-to-Own</a></li>
-					<li class="<%= 'active' if params[:controller] == 'listings' && params[:action] == 'new' %>"><A href="#">Submit Property</a></li>
 					<% if user_signed_in? %>
-					<li class="<%= 'active' if params[:controller] == 'devise/sessions' %>"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Your Account <span class="caret"></span></a>
-						 <ul class="dropdown-menu">
-					    	<li><%= link_to 'Your Account', dashboard_index_path %></li>
-					    </ul>
-					</li>
-				   
+						<li class="<%= 'active' if params[:controller] == 'devise/sessions' %>"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Your Account <span class="caret"></span></a>
+							 <ul class="dropdown-menu">
+						    	<li><%= link_to 'Profile', edit_user_registration_path %></li>
+						    	<li><%= link_to 'Your Listings', dashboard_index_path %></li>
+						    	<li><%= link_to 'Messages', user_messages_path %></li>
+						    	<li class="divider"></li>
+						    	<li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
+						    </ul>
+						</li>
 					<% else %>
-					<li class="<%= 'active' if params[:controller] == 'devise/sessions' %>"> <%= link_to 'Sign in', sign_in_path %></li>
+						<li class="<%= 'active' if params[:controller] == 'devise/sessions' %>"> <%= link_to 'Sign in', sign_in_path %></li>
 					<% end %>
 				</ul>
+				</div>
 			</div>
 	</div>
 </div>

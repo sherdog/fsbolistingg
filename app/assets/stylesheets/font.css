@@ -1,0 +1,186 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('icomoon.eot');
+	src:url('icomoon.eot?#iefix') format('embedded-opentype'),
+		url('icomoon.woff') format('woff'),
+		url('icomoon.ttf') format('truetype'),
+		url('icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icomoon';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-home, .icon-office, .icon-newspaper, .icon-pencil, .icon-image, .icon-image-2, .icon-camera, .icon-play, .icon-film, .icon-credit, .icon-phone, .icon-notebook, .icon-envelop, .icon-location, .icon-location-2, .icon-clock, .icon-alarm, .icon-bell, .icon-calendar, .icon-calendar-2, .icon-tablet, .icon-mobile, .icon-mobile-2, .icon-bubble, .icon-user, .icon-lock, .icon-key, .icon-cloud, .icon-remove, .icon-remove-2, .icon-stats, .icon-facebook, .icon-facebook-2, .icon-twitter, .icon-twitter-2, .icon-twitter-3, .icon-youtube, .icon-envelope, .icon-checkmark, .icon-checkmark-2, .icon-close, .icon-spam, .icon-star, .icon-star-2, .icon-star-3, .icon-heart, .icon-heart-2, .icon-thumbs-up, .icon-thumbs-up-2 {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-home:before {
+	content: "\e000";
+}
+.icon-office:before {
+	content: "\e001";
+}
+.icon-newspaper:before {
+	content: "\e002";
+}
+.icon-pencil:before {
+	content: "\e003";
+}
+.icon-image:before {
+	content: "\e004";
+}
+.icon-image-2:before {
+	content: "\e005";
+}
+.icon-camera:before {
+	content: "\e006";
+}
+.icon-play:before {
+	content: "\e007";
+}
+.icon-film:before {
+	content: "\e008";
+}
+.icon-credit:before {
+	content: "\e009";
+}
+.icon-phone:before {
+	content: "\e00a";
+}
+.icon-notebook:before {
+	content: "\e00b";
+}
+.icon-envelop:before {
+	content: "\e00c";
+}
+.icon-location:before {
+	content: "\e00d";
+}
+.icon-location-2:before {
+	content: "\e00e";
+}
+.icon-clock:before {
+	content: "\e00f";
+}
+.icon-alarm:before {
+	content: "\e010";
+}
+.icon-bell:before {
+	content: "\e011";
+}
+.icon-calendar:before {
+	content: "\e012";
+}
+.icon-calendar-2:before {
+	content: "\e013";
+}
+.icon-tablet:before {
+	content: "\e014";
+}
+.icon-mobile:before {
+	content: "\e015";
+}
+.icon-mobile-2:before {
+	content: "\e016";
+}
+.icon-bubble:before {
+	content: "\e017";
+}
+.icon-user:before {
+	content: "\e018";
+}
+.icon-lock:before {
+	content: "\e019";
+}
+.icon-key:before {
+	content: "\e01a";
+}
+.icon-cloud:before {
+	content: "\e01b";
+}
+.icon-remove:before {
+	content: "\e01c";
+}
+.icon-remove-2:before {
+	content: "\e01d";
+}
+.icon-stats:before {
+	content: "\e01e";
+}
+.icon-facebook:before {
+	content: "\e01f";
+}
+.icon-facebook-2:before {
+	content: "\e020";
+}
+.icon-twitter:before {
+	content: "\e021";
+}
+.icon-twitter-2:before {
+	content: "\e022";
+}
+.icon-twitter-3:before {
+	content: "\e023";
+}
+.icon-youtube:before {
+	content: "\e024";
+}
+.icon-envelope:before {
+	content: "\e025";
+}
+.icon-checkmark:before {
+	content: "\e026";
+}
+.icon-checkmark-2:before {
+	content: "\e027";
+}
+.icon-close:before {
+	content: "\e028";
+}
+.icon-spam:before {
+	content: "\e029";
+}
+.icon-star:before {
+	content: "\e02a";
+}
+.icon-star-2:before {
+	content: "\e02b";
+}
+.icon-star-3:before {
+	content: "\e02c";
+}
+.icon-heart:before {
+	content: "\e02d";
+}
+.icon-heart-2:before {
+	content: "\e02e";
+}
+.icon-thumbs-up:before {
+	content: "\e02f";
+}
+.icon-thumbs-up-2:before {
+	content: "\e030";
+}

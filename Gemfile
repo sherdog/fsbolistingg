@@ -9,9 +9,27 @@ gem 'sqlite3'
 gem 'simple_form'
 gem 'devise'
 gem 'american_date'
+gem 'geocoder'
+gem "jquery-fileupload-rails"
+gem "paperclip", "~> 3.0"
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'kaminari'
+gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: '4.0-stable'
 
 # Gems used only for assets and not required
 # in production environments by default.
+group :production do
+	gem 'mysql2'
+end
+
+group :test do 
+	gem 'sqlite3'
+end
+group :development do
+	gem 'sqlite3'
+end
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

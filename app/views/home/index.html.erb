@@ -1,7 +1,9 @@
 
 
 <!-- start body area here. -->
-
+<%= content_tag(:div, flash[:error], :class => "alert alert-danger") if flash[:error] %>
+		<%= content_tag(:div, flash[:notice], :class => "alert alert-warning") if flash[:notice] %>
+		<%= content_tag(:div, flash[:alert], :class => "alert") if flash[:alert] %>
 <!-- end body area here. -->
 
 

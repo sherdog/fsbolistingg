@@ -1,8 +1,18 @@
 Fsbo::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  FACEBOOK_APP_ID = '479849805443607'
+  FACEBOOK_SECRET = 'f5ac1ffdccf68324543c50114886f5ed'
+
+
   # Code is not reloaded between requests
   config.cache_classes = true
+
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  # Precompile additional assets
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
+  # Log error messages when you accidentally call methods on nil.
+  config.whiny_nils = false
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -19,6 +29,8 @@ Fsbo::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH

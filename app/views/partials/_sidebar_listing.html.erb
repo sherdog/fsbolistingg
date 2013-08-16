@@ -1,0 +1,6 @@
+ <div class="list-group">
+	<%= link_to content_tag(:span, '', :class => "glyphicon glyphicon-pencil" ) + " Edit Listing", edit_listing_path(@listing), :class => "#{sidenav_item(edit_listing_path)}" %>
+	<%= link_to content_tag(:span, '', :Class => 'glyphicon glyphicon-link') + ' Add to Craigslist', share_listing_path(@listing), :class => "#{sidenav_item(share_listing_path)}" %>
+	<%= link_to content_tag(:span, '', :class => 'glyphicon glyphicon-envelope') + ' Contact Inquiries' + content_tag(:span, @message_count, :class => 'badge') , user_messages_path, :class => "#{sidenav_item(user_messages_path)}" %>
+	<a href="#" class="list-group-item"><span class="glyphicon glyphicon-star"></span> Feature Listing</a>
+</div>

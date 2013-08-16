@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  from: MyString
+  phone: MyString
+  message: MyString
+  user_id: 1
+  listing_id: 1
+  message: MyText
+  date_added: 2013-08-07 14:00:37
+  viewed: false
+
+two:
+  from: MyString
+  phone: MyString
+  message: MyString
+  user_id: 1
+  listing_id: 1
+  message: MyText
+  date_added: 2013-08-07 14:00:37
+  viewed: false

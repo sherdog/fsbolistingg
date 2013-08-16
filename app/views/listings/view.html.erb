@@ -1,0 +1,161 @@
+
+<div class="container">
+
+	<div class="row">
+		<ul class="breadcrumb">
+			<li><%= link_to "Listings", dashboard_index_path %></li>
+			<li class="active"><%= @listing.address_1 %> <% if @listing.address_2.present? %><%= @listing.address_2 %> <% end %> <%= @listing.city %></li>
+		</ul>
+	</div>
+		<%= content_tag(:div, flash[:error], :class => "alert alert-danger") if flash[:error] %>
+		<%= content_tag(:div, flash[:notice], :class => "alert alert-warning") if flash[:notice] %>
+		<%= content_tag(:div, flash[:alert], :class => "alert") if flash[:alert] %>
+	<div class="row listing-heading">
+			<div class="col-lg-12">
+				<h1><%= @listing.address_1 %> <% if @listing.address_2.present? %> <%= @listing.address_2 %> <% end %> <%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %></h1>
+				<h3><%= number_to_currency(@listing.price) %></h3>
+			</div>
+		</div>
+		<div class="row">
+		
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-6 view-listing-details">
+							<h4><%= @listing.address_1 %> 
+								<% if @listing.address_2.present? %>
+								<%= @listing.address_2 %> 
+							<% end %>
+							</h4>
+							<h4><%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %></h4>
+							<h4><%= number_to_currency(@listing.price) %></h4>
+							<% if @listing.mls_number.present? %> <h4>MLS #: <%= @listing.mls_number %></h4> <% end %>
+
+							<%= pluralize(@listing.bedrooms, 'Bedroom') %> / <%= @listing.bathrooms %> Bath <br />
+							<%= @listing.sqft %> Sq. Ft. 
+							<p>
+						</div>
+						<div class="col-lg-6">
+							<%= image_tag(@listing.images.last.image.url(:medium), :class => 'img-responsive pull-right') %>
+							<!-- Show images, first one we'll feature cuz yeah. -->
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<h3>Property Description</h3>
+							<hr />
+							<p><%= @listing.description %></p>
+							<h4>Property Details</h4>
+							<table class="table">
+							<tbody>
+									<tr>
+										<td><strong>Property Type</strong></td>
+										<td><%= @listing.property_type %></td>
+									</tr>
+									<tr>
+										<td><strong>Yr. Built</strong></td>
+										<td><%= @listing.year_built %></td>
+									</tr>
+									<tr>
+										<td><strong>Basement</strong></td>
+										<td><% if @listing.basement_type.present? %> <%= @listing.basement_type %> <% else %> <% end %></td>
+									</tr>
+									<tr>
+										<td><strong>Cooling</strong></td>
+										<td><% if @listing.cooling.present? %> <%= @listing.cooling %> <% else %> N/a <% end %></td>
+									</tr>
+									<tr>
+										<td><strong>Heating</strong></td>
+										<td><% if @listing.heating.present? %> <%= @listing.heating %> <% else %> N/a <% end %></td>
+									</tr>
+									<tr>
+										<td><strong>Lot Size</strong></td>
+										<td><% if @listing.lot_size.present? %> <%= @listing.lot_size %> <% else %> N/a <% end %></td>
+									</tr>
+									<tr>
+										<td><strong>Garage</strong></td>
+										<td><% if @listing.garage.present? %> <%= @listing.garage %> <% else %> N/a <% end %></td>
+									</tr>
+									<tr>
+										<td><strong>Fireplace</strong></td>
+										<td><% if @listing.fireplace.present? %> <%= @listing.fireplace %> <% else %> N/a <% end %></td>
+									</tr>
+								</tbody>
+							</table>
+						</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<h3>Property Photo's</h3>
+							<hr />
+							<p>
+							<div>
+								<% for image in @listing.images %>
+									<%= image_tag(image.image.url(:small), :class => 'img-responsive', :style => 'min-height:100px; max-height:100px;') %>
+								<% end %>
+							</div>
+							</p>
+						</div>
+					</div>
+					
+					<div class="row ">
+						<div class="col-lg-12">
+							<h3>Map Location</h3>
+							<hr />
+							<div id="map_location" style="height:300px;"></div>
+						</div>
+					</div>
+					<br />
+					<br />
+					<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVeNrxq22lK88fcdFa4AIr1IEAX8PDiGk&sensor=false">
+					</script>
+					<script type="text/javascript">
+					function initialize() {
+						var iconBase = 'http://cvsimotorsports.com/';
+						var latLong = new google.maps.LatLng(<%= @listing.latitude %>, <%= @listing.longitude %>);
+						var mapOptions = {
+							 center: latLong,
+							 zoom: 15,
+							 mapTypeId: google.maps.MapTypeId.ROADMAP
+						};
+
+						var map = new google.maps.Map(document.getElementById("map_location"),
+							mapOptions);
+						
+						var iconShadow = {
+							url: iconBase + 'icon_shadow.png',
+							anchor: new google.maps.Point(3,13)
+						};
+
+						var marker = new google.maps.Marker({
+							icon: iconBase + 'fsbo_marker.png',
+							shadow: iconShadow,
+							position:  latLong,
+							map: map,
+							title: "<%= @listing.address_1 %> <%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %> "
+						 });
+						
+						var popup = new google.maps.InfoWindow({
+							content: '<strong>For Sale By Owner</strong><br /><% for image in @listing.images %> <img src="<%= image.image.url(:small) %>" width="75" style="margin:5px" align="right" /><% end %><%= @listing.address_1 %> <br /> <% if @listing.address_2.present? %><%= @listing.address_2 %><br /><% end %><%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %><br /><%= number_to_currency(@listing.price) %><br /><strong>P.</strong> <%= @listing.contact_number %> '
+						});
+						
+						google.maps.event.addListener(marker, 'click', function(e) {
+							popup.open(map, this);
+						});
+						}
+						
+						google.maps.event.addDomListener(window, 'load', initialize);
+					</script>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="row">
+
+	</div>
+</div>

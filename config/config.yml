@@ -1,0 +1,14 @@
+development:
+  google_api_key: AIzaSyAVeNrxq22lK88fcdFa4AIr1IEAX8PDiGk
+  facebook_api_id: 412736445504336
+  facebook_api_secret: 4b6f0543fac2c73fb00f42e0c840f6d8
+
+test:
+  google_api_key: AIzaSyAVeNrxq22lK88fcdFa4AIr1IEAX8PDiGk
+  facebook_api_id: 479849805443607
+  facebook_api_secret: f5ac1ffdccf68324543c50114886f5ed
+
+production:
+  google_api_key: AIzaSyCt2IG6TJ_B_WChtKTxwiAoGRC28ElnYE8
+  facebook_api_id: 479849805443607
+  facebook_api_secret: f5ac1ffdccf68324543c50114886f5ed
