@@ -16,7 +16,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: '4.0-stable'
-
+gem "colorbox-rails", "~> 0.1.0"
 # Gems used only for assets and not required
 # in production environments by default.
 group :production do

@@ -14,4 +14,4 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery-fileupload
-
+//= require colorbox-rails

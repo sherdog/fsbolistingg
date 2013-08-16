@@ -37,7 +37,7 @@
 							<p>
 						</div>
 						<div class="col-lg-6">
-							<%= image_tag(@listing.images.last.image.url(:medium), :class => 'img-responsive pull-right') %>
+							<%= image_tag(@listing.images.first.image.url(:medium), :class => 'img-responsive pull-right') %>
 							<!-- Show images, first one we'll feature cuz yeah. -->
 
 						</div>
@@ -94,7 +94,7 @@
 							<p>
 							<div>
 								<% for image in @listing.images %>
-									<%= image_tag(image.image.url(:small), :class => 'img-responsive', :style => 'min-height:100px; max-height:100px;') %>
+									<%= link_to image_tag(image.image.url(:small), :class => 'img-responsive', :style => 'min-height:100px; max-height:100px;'), image.image.url(:large), :data => { :colorbox_static => true } %>
 								<% end %>
 							</div>
 							</p>
@@ -105,7 +105,7 @@
 						<div class="col-lg-12">
 							<h3>Map Location</h3>
 							<hr />
-							<div id="map_location" style="height:300px;"></div>
+							<div id="map_location" style="height:500px;"></div>
 						</div>
 					</div>
 					<br />
@@ -137,10 +137,39 @@
 							map: map,
 							title: "<%= @listing.address_1 %> <%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %> "
 						 });
+
+						var infoWindowHTML = '<strong>For Sale By Owner</strong><br /> <img src="<%= @listing.images.first.image.url(:small) %>" width="75" style="margin:5px" align="right" /><%= @listing.address_1 %> <br /> <% if @listing.address_2.present? %><%= @listing.address_2 %><br /><% end %><%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %><br /><%= number_to_currency(@listing.price) %><br /><strong>P.</strong> <%= @listing.contact_number %>'
+
 						
-						var popup = new google.maps.InfoWindow({
-							content: '<strong>For Sale By Owner</strong><br /><% for image in @listing.images %> <img src="<%= image.image.url(:small) %>" width="75" style="margin:5px" align="right" /><% end %><%= @listing.address_1 %> <br /> <% if @listing.address_2.present? %><%= @listing.address_2 %><br /><% end %><%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %><br /><%= number_to_currency(@listing.price) %><br /><strong>P.</strong> <%= @listing.contact_number %> '
+
+						var content = document.createElement("DIV");
+					    var title = document.createElement("DIV");
+					    var html = document.createElement("DIV");
+					    var streetview = document.createElement("DIV");
+					      
+					    html.innerHTML = infoWindowHTML;
+					    title.innerHTML = '<%= @listing.address_1 %>';
+					    content.appendChild(title);
+					    content.appendChild(html);
+					    content.appendChild(streetview);
+					    streetview.style.width = "500px";
+					    streetview.style.height = "300px";
+
+					    var popup = new google.maps.InfoWindow({
+							content: content,
+        					size: new google.maps.Size(400,100)
 						});
+
+					    google.maps.event.addListenerOnce(popup, "domready", function() {
+				        var panorama = new google.maps.StreetViewPanorama(streetview, {
+				            navigationControl: false,
+				            enableCloseButton: false,
+				            addressControl: false,
+				            linksControl: false,
+				            visible: true,
+				            position: marker.getPosition()
+				        });
+				      }); //end maps ListenerOnce
 						
 						google.maps.event.addListener(marker, 'click', function(e) {
 							popup.open(map, this);
