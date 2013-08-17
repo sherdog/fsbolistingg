@@ -172,9 +172,9 @@
             <div class="row">
               <div class="col-5 input-group" >
                   <span class="input-group-addon input-sm">$</span>
-                  <%= text_field_tag :price_from, params[:price_from], :placeholder => "Min", :class => 'form-control input-sm' %></div>
+                  <%= text_field_tag :price_from, @selected_price_from, :placeholder => "Min", :class => 'form-control input-sm' %></div>
                   <div class="col-2 text-center">-</div>
-                  <div class="col-5 input-group"><span class="input-group-addon input-sm">$</span><%= text_field_tag :price_to, params[:price_to], :placeholder => "Max", :class => 'form-control input-sm' %>
+                  <div class="col-5 input-group"><span class="input-group-addon input-sm">$</span><%= text_field_tag :price_to, @selected_price_to, :placeholder => "Max", :class => 'form-control input-sm' %>
               </div>
             </div>
             <div class="row">
@@ -188,28 +188,28 @@
             <div class="row">
               <div class="col-6">
                 <select name="bedrooms" id="bedrooms" class="form-control input-sm">
-                  <option value="1" <% if params[:bedrooms] == 1 %> selected="selected" <% end %>>1+</option>
-                  <option value="2" <% if params[:bedrooms] == 2 %> selected="selected" <% end %>>2+</option>
-                  <option value="3" <% if params[:bedrooms] == 3 %> selected="selected" <% end %>>3+</option>
-                  <option value="4" <% if params[:bedrooms] == 4 %> selected="selected" <% end %>>4+</option>
-                  <option value="5" <% if params[:bedrooms] == 5 %> selected="selected" <% end %>>5+</option>
-                  <option value="6" <% if params[:bedrooms] == 6 %> selected="selected" <% end %>>6+</option>
-                  <option value="7" <% if params[:bedrooms] == 7 %> selected="selected" <% end %>>7+</option>
-                  <option value="8" <% if params[:bedrooms] == 8 %> selected="selected" <% end %>>8+</option>
-                  <option value="9" <% if params[:bedrooms] == 9 %> selected="selected" <% end %>>9+</option>
+                  <option value="1" <% if @selected_bedrooms == "1" %> selected="selected" <% end %>> 1+</option>
+                  <option value="2" <% if @selected_bedrooms == "2" %> selected="selected" <% end %> >2+</option>
+                  <option value="3" <% if @selected_bedrooms == "3" %> selected="selected" <% end %> >3+</option>
+                  <option value="4" <% if @selected_bedrooms == "4" %> selected="selected" <% end %> >4+</option>
+                  <option value="5" <% if @selected_bedrooms == "5" %> selected="selected" <% end %> >5+</option>
+                  <option value="6" <% if @selected_bedrooms == "6" %> selected="selected" <% end %> >6+</option>
+                  <option value="7" <% if @selected_bedrooms == "7" %> selected="selected" <% end %> >7+</option>
+                  <option value="8" <% if @selected_bedrooms == "8" %> selected="selected" <% end %> >8+</option>
+                  <option value="9" <% if @selected_bedrooms == "9" %> selected="selected" <% end %> >9+</option>
                 </select>
               </div>
               <div class="col-6">
                 <select name="bathrooms" id="bathrooms" class="form-control input-sm">
-                  <option value="1" <% if params[:bathrooms] == 1 %> selected="selected" <% end %> >1+</option>
-                  <option value="2" <% if params[:bathrooms] == 2 %> selected="selected" <% end %>>2+</option>
-                  <option value="3" <% if params[:bathrooms] == 3 %> selected="selected" <% end %>>3+</option>
-                  <option value="4" <% if params[:bathrooms] == 4 %> selected="selected" <% end %>>4+</option>
-                  <option value="5" <% if params[:bathrooms] == 5 %> selected="selected" <% end %>>5+</option>
-                  <option value="6" <% if params[:bathrooms] == 6 %> selected="selected" <% end %>>6+</option>
-                  <option value="7" <% if params[:bathrooms] == 7 %> selected="selected" <% end %>>7+</option>
-                  <option value="8" <% if params[:bathrooms] == 8 %> selected="selected" <% end %>>8+</option>
-                  <option value="9" <% if params[:bathrooms] == 9 %> selected="selected" <% end %>>9+</option>
+                  <option value="1" <% if @selected_bathrooms == "1" %> selected="selected" <% end %> >1+</option>
+                  <option value="2" <% if @selected_bathrooms == "2" %> selected="selected" <% end %> >2+</option>
+                  <option value="3" <% if @selected_bathrooms == "3" %> selected="selected" <% end %> >3+</option>
+                  <option value="4" <% if @selected_bathrooms == "4" %> selected="selected" <% end %> >4+</option>
+                  <option value="5" <% if @selected_bathrooms == "5" %> selected="selected" <% end %> >5+</option>
+                  <option value="6" <% if @selected_bathrooms == "6" %> selected="selected" <% end %> >6+</option>
+                  <option value="7" <% if @selected_bathrooms == "7" %> selected="selected" <% end %> >7+</option>
+                  <option value="8" <% if @selected_bathrooms == "8" %> selected="selected" <% end %> >8+</option>
+                  <option value="9" <% if @selected_bathrooms == "9" %> selected="selected" <% end %> >9+</option>
                 </select>
               </div>
             </div>
@@ -222,7 +222,7 @@
 
             <div class="row">
               <div class="col-12">
-                <%= select_tag :city, options_from_collection_for_select(@cities, "city", "city"), :class => 'form-control input-sm', :prompt => 'Any' %>
+                <%= select_tag :city, options_from_collection_for_select(@cities, "city", "city", @selected_city), :class => 'form-control input-sm', :prompt => 'Any' %>
               </div>
             </div>
             <hr />

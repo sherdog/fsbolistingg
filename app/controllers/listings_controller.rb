@@ -9,6 +9,30 @@ class ListingsController < ApplicationController
 
 		@cities = Listing.select(:city).uniq
 
+		if params[:city].present? 
+			@selected_city = params[:city]
+		end
+
+		if params[:state].present?
+			@selected_state = params[:state]
+		end
+
+		if params[:bedrooms].present?
+			@selected_bedrooms = params[:bedrooms]
+		end
+
+		if params[:bathrooms].present?
+			@selected_bathrooms = params[:bathrooms]
+		end
+
+		if params[:price_from]
+			@selected_price_from = params[:price_from]
+		end
+
+		if params[:price_to]
+			@selected_price_to = params[:price_to]
+		end
+
 		scope = Listing
 
 		if params[:city].present?
