@@ -80,6 +80,7 @@ class ListingsController < ApplicationController
 	#public listing view
 	def show
 		@listing = Listing.find(params[:id])
+
 		@user_messages = UserMessage.where(user_id: current_user.id)
 		@message_count = @user_messages.count
 	end
@@ -100,7 +101,8 @@ class ListingsController < ApplicationController
 		#get lat/long from address
 
 		if @listing.save
-			redirect_to edit_listing_path(@listing, :pics => 'upload')
+			flash[:alert] = 'Your property was successfully added'
+			redirect_to listing_path(@listing)
 		else
 			render "new"
 		end

@@ -15,12 +15,11 @@ ActiveRecord::Schema.define(:version => 20130811163254) do
 
   create_table "images", :force => true do |t|
     t.string   "listing_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
+    t.string   "image_file_size"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "listings", :force => true do |t|
@@ -55,12 +54,16 @@ ActiveRecord::Schema.define(:version => 20130811163254) do
     t.string   "contact_number"
     t.string   "contact_email"
     t.string   "mls_number"
+    t.string   "lat"
+    t.string   "long"
     t.string   "basement_type"
     t.string   "slug"
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "featured",          :default => 0
   end
+
+  add_index "listings", ["slug"], :name => "index_listings_on_slug", :unique => true
 
   create_table "property_types", :force => true do |t|
     t.string   "title"
@@ -96,12 +99,10 @@ ActiveRecord::Schema.define(:version => 20130811163254) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.string   "slug"
     t.string   "phone_number"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
 
 end
